@@ -1,0 +1,36 @@
+/*html,
+body {
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background: #333;
+	color: #555;
+	font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}*/
+
+canvas {
+	border: 1px solid black;
+}
+
+td {
+	border: 1px solid black;
+	padding: 18px;
+	margin-right: 10px;
+}
+
+.selected {
+	border: 3px solid blue;
+
+
+}
+
+.play {
+	background-color: red;
+}
+
+#xycontroller {
+	border: 1px solid black;
+	display: block;
+	margin-top: 10px;
+	background-color: rgb(30, 253, 75);
+}
