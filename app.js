@@ -1,68 +1,50 @@
-var myAudioContext = new webkitAudioContext();
+var myAudioContext = new AudioContext();
 var colSelected = 0;
 var timeoutId = 0;
 var filter = myAudioContext.createBiquadFilter();
 var filterDetune = -3000;
 var filterQ = 200;
 
-// var panner = myAudioContext.createAudioPannerNode();
-
-
-
 function playNote(freq) {
- 
-  
-  
   var oscillator = myAudioContext.createOscillator();
-  
+
   oscillator.connect(filter);
   filter.connect(myAudioContext.destination);
 
-  oscillator.type = 'sine';
+  oscillator.type = 'saw';
   oscillator.frequency.value = freq;
-  
-  // console.log(filter);
   filter.type = 1;
 
   filter.frequency.value = 500;
 
   filter.Q.value = filterQ;
   filter.detune.value = filterDetune;
-  // console.log(filter.Q.value)
-  // filter.gain.value = filterGain;
 
-
-
-  
-  oscillator.noteOn(0);
+  oscillator.start(0);
   setTimeout(function() {
-    oscillator.noteOff(0)
-  }, 200);
-
-};
-
-
-
+    oscillator.stop(0);
+  }, 100);
+}
 
 
 function run() {
   var current = colSelected += 1;
   var previous = colSelected - 1;
-  if (previous <= 0) previous = 16
+  if (previous <= 0) previous = 16;
 
-  var $step = $('tr td:nth-child('+current+')')
-  var prevStep = $('tr td:nth-child('+previous+')')
+  var $step = $('tr td:nth-child('+current+')');
+  var prevStep = $('tr td:nth-child('+previous+')');
 
   $step.addClass('selected');
   prevStep.removeClass('selected');
 
-  $.each($step, function(index, value) { 
+  $.each($step, function(index, value) {
     if ($($step[index]).attr('class') == 'play selected') {
-      var freq = $($step[index]).parent().data('freq')
+      var freq = $($step[index]).parent().data('freq');
       playNote(freq);
-    };
+    }
 
-  })
+  });
 
   timeoutId = setTimeout(run, 200);
   if (colSelected >= 16) colSelected = 0;
@@ -71,37 +53,28 @@ function run() {
 function enableStep() {
   $('tr').click(function(e) {
     $(e.target).toggleClass('play');
-  })
-};
+  });
+}
 
 function tracking() {
   var canvas = document.getElementById("xycontroller");
-  var ctx = canvas.getContext('2d')
+  var ctx = canvas.getContext('2d');
 
   $(canvas).mousemove(function(e) {
     var x = -3000;
-    x += (e.pageX) * 12;
+    x += (e.pageX) * 16;
     filterDetune = x;
 
     var y = 1;
-    y += (e.pageY - this.offsetTop) / 2;
-    filterQ = y
-    // console.log(filterQ);
-
+    y += (e.pageY - this.offsetTop) / 1;
+    filterQ = y;
   });
 
   $(canvas).mouseleave(function() {
     filterDetune = -3000;
-    filterQ = 1
+    filterQ = 1;
   });
-
-
-};
-
-
-
-
-
+}
 
 
 $(document).ready(function() {
@@ -111,11 +84,4 @@ $(document).ready(function() {
   $('#pause').on('click', function() {
     clearTimeout(timeoutId);
   });
-  // console.log(filterDetune)
-  // run();
-  // run();
-  // setInterval(playNote, 1000);
-  // playNote();
-
-
 });
