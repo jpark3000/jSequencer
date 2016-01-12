@@ -11,9 +11,9 @@ function playNote(freq) {
   oscillator.connect(filter);
   filter.connect(myAudioContext.destination);
 
-  oscillator.type = 'saw';
+  oscillator.type = 'sawtooth';
   oscillator.frequency.value = freq;
-  filter.type = 1;
+  filter.type = 'lowpass';
 
   filter.frequency.value = 500;
 
