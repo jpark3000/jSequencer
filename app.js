@@ -3,7 +3,7 @@ var colSelected = 0;
 var timeoutId = 0;
 var filter = myAudioContext.createBiquadFilter();
 var filterDetune = -3000;
-var filterQ = 200;
+var filterQ = 1;
 
 function playNote(freq) {
   var oscillator = myAudioContext.createOscillator();
