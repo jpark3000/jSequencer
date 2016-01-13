@@ -62,11 +62,11 @@ function tracking() {
 
   $(canvas).mousemove(function(e) {
     var x = -3000;
-    x += (e.pageX) * 16;
+    x += (e.pageX) * 8;
     filterDetune = x;
 
     var y = 1;
-    y += (e.pageY - this.offsetTop) / 1;
+    y += (e.pageY - this.offsetTop) / 2;
     filterQ = y;
   });
 
