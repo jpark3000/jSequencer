@@ -2,7 +2,7 @@ var myAudioContext = new AudioContext();
 var colSelected = 0;
 var timeoutId = 0;
 var filter = myAudioContext.createBiquadFilter();
-var filterDetune = -2500;
+var filterDetune = -1000;
 var filterQ = 1;
 
 function playNote(freq) {
@@ -71,7 +71,7 @@ function tracking() {
   });
 
   $(canvas).mouseleave(function() {
-    filterDetune = -3000;
+    filterDetune = -1000;
     filterQ = 1;
   });
 }
