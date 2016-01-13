@@ -2,7 +2,7 @@ var myAudioContext = new AudioContext();
 var colSelected = 0;
 var timeoutId = 0;
 var filter = myAudioContext.createBiquadFilter();
-var filterDetune = -3000;
+var filterDetune = -2500;
 var filterQ = 1;
 
 function playNote(freq) {
