@@ -51,7 +51,7 @@ function run() {
 }
 
 function enableStep() {
-  $('tr').click(function(e) {
+  $('tr').on('click touchstart', function(e) {
     $(e.target).toggleClass('play');
   });
 }
